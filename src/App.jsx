@@ -7,6 +7,8 @@ import Newsline from './components/Newsline/Newsline';
 
 import './styles/style.css';
 
+// const defaultState = [];
+
 // const reducer = (state, action) => {
 //   switch (action.type) {
 //     default:
