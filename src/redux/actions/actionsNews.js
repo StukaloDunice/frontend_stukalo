@@ -1,8 +1,9 @@
 import actionsTypes from '../actionsTypes/actionsTypes';
 
-const getNews = () => {
-  return {
-    type: actionsTypes.GET_NEWS_REQUEST,
-    payload: text
-  }
-}
+const requestNews = () => ({ type: actionsTypes.GET_NEWS_REQUEST });
+
+const requestNewsSuccess = (payload) => ({ type: actionsTypes.GET_NEWS_REQUEST, payload });
+
+const requestNewsError = (error) => ({ type: actionsTypes.GET_NEWS_ERROR, error });
+
+export { requestNews, requestNewsSuccess, requestNewsError };

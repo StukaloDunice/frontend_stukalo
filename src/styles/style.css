@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-.newsline {
+.mainPage {
   display: flex;
   flex-wrap: wrap;
   margin: 50px 50px;
