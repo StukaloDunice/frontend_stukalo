@@ -6,7 +6,8 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-function CardNews({ data }) {
+function CardNews(props) {
+  const { data } = props;
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -26,7 +27,7 @@ function CardNews({ data }) {
           {data.tags}
         </Typography>
         <Typography gutterBottom variant="subtitle2">
-          {data.User.username}
+          {data.user.username}
         </Typography>
       </CardContent>
     </Card>
@@ -39,7 +40,7 @@ CardNews.propTypes = {
     content: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    User: PropTypes.shape({
+    user: PropTypes.shape({
       username: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
