@@ -6,27 +6,27 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
-function CardNews({ oneNew }) {
+function CardNews({ data }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
         component="img"
         height="140"
-        image={oneNew.image}
-        alt={oneNew.image}
+        image={data.image}
+        alt={data.image}
       />
       <CardContent>
         <Typography gutterBottom variant="h5">
-          {oneNew.title}
+          {data.title}
         </Typography>
         <Typography variant="body2">
-          {oneNew.content}
+          {data.content}
         </Typography>
         <Typography gutterBottom variant="caption" color="text.secondary">
-          {oneNew.tags}
+          {data.tags}
         </Typography>
         <Typography gutterBottom variant="subtitle2">
-          {oneNew.User.username}
+          {data.User.username}
         </Typography>
       </CardContent>
     </Card>
@@ -34,7 +34,7 @@ function CardNews({ oneNew }) {
 }
 
 CardNews.propTypes = {
-  oneNew: PropTypes.shape({
+  data: PropTypes.shape({
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,

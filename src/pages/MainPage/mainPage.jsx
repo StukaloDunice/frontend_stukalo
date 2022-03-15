@@ -28,7 +28,7 @@ function MainPage() {
   }
   return (
     <div className="main-page">
-      {news.map((oneNew) => <CardNews key={oneNew.id} oneNew={oneNew} />)}
+      {news.map((item) => <CardNews key={item.id} data={item} />)}
     </div>
   );
 }
