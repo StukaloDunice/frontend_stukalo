@@ -5,6 +5,8 @@ import TextField from '@mui/material/TextField';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 
+import './style.css';
+
 function Search() {
   return (
     <div className="form-search">

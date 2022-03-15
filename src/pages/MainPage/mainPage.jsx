@@ -1,13 +1,36 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
+
+import { requestNews } from '../../redux/actions/actionsNews';
 import CardNews from '../../components/CardNews/CardNews';
 
+import './style.css';
+
 function MainPage() {
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(requestNews()), [dispatch]);
+  const { news, error, loading } = useSelector((state) => state.allNews);
+  if (error) {
+    return (
+      <Alert severity="error">{error.message}</Alert>
+    );
+  }
+  if (loading) {
+    return (
+      <Box sx={{ display: 'flex' }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
   return (
-    <div className="mainPage">
-      <CardNews title="Card1" content="sdfdsf" tags="#sadsad #ewweq" image="/images/sea.jpg" username="Andrey" />
+    <div className="main-page">
+      {news.map((oneNew) => <CardNews key={oneNew.id} oneNew={oneNew} />)}
     </div>
   );
 }
 
-export default connect(null, null)(MainPage);
+export default MainPage;

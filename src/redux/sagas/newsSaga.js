@@ -3,11 +3,15 @@ import api from '../../api/api';
 import actionsTypes from '../actionsTypes/actionsTypes';
 import { requestNewsSuccess, requestNewsError } from '../actions/actionsNews';
 
+async function getAll() {
+  const payload = await api.get('/news');
+  return payload;
+}
+
 function* newsWorker() {
   try {
-    const payload = yield call(api.get('/news'));
-    console.log(payload);
-    yield put(requestNewsSuccess(payload));
+    const { data } = yield call(getAll);
+    yield put(requestNewsSuccess(data));
   } catch (error) {
     yield put(requestNewsError(error));
   }

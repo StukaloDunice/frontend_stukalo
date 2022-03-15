@@ -6,7 +6,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-// import PropTypes from 'prop-types';
 function Header() {
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -22,7 +21,5 @@ function Header() {
     </Box>
   );
 }
-// Header.propTypes = {
-//   name: PropTypes.string.isRequired,
-// };
+
 export default Header;
