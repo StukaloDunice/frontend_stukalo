@@ -9,7 +9,7 @@ import WindowAuthorization from '../WindowAuthorization/WindowAuthorization';
 
 function Header() {
   const [open, setOpen] = useState(false);
-
+  const [target, setTarget] = useState(null);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -25,9 +25,15 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <Button color="inherit" onClick={handleOpen}>Log in</Button>
-          <Button color="inherit" onClick={handleOpen}>Sign up</Button>
-          <WindowAuthorization open={open} handleClose={handleClose} />
+          <Button color="inherit" className="Log-in" onClick={() => {
+            handleOpen();
+            setTarget("Log-in");
+          }}>Log in</Button>
+          <Button color="inherit" className="Sign-up" onClick={() => {
+            handleOpen();
+            setTarget("Sign-up");
+            }}>Sign up</Button>
+          <WindowAuthorization open={open} target={target} handleClose={handleClose} />
         </Toolbar>
       </AppBar>
     </Box>

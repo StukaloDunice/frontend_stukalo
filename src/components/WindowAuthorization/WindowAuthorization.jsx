@@ -17,7 +17,7 @@ import { requestAuth } from '../../redux/actions/actionsAuthorization';
 function WindowAuthorization(props) {
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.authUser);
-  const { open, handleClose } = props;
+  const { open, handleClose, target } = props;
   const validate = (values) => {
     const errors = {};
     if (!values.password) {
@@ -48,12 +48,11 @@ function WindowAuthorization(props) {
     onSubmit: (values) => { dispatch(requestAuth(values)); },
   });
   return (
-
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit}>
-        <DialogTitle>Log in</DialogTitle>
+        <DialogTitle>{target === "Log-in" ? "Log in" : "Sign up"}</DialogTitle>
         <DialogContent>
-          <TextField
+          {target === "Log-in" ? (<TextField
             error={!!((formik.touched.username && formik.errors.username))}
             autoFocus
             margin="dense"
@@ -66,7 +65,7 @@ function WindowAuthorization(props) {
             value={formik.values.username}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-          />
+          />) : null}
           <TextField
             error={!!((formik.touched.email && formik.errors.email))}
             margin="dense"
@@ -98,13 +97,14 @@ function WindowAuthorization(props) {
       && <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box>}
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Log in</Button>
+          <Button type="submit">{target === "Log-in" ? "Log in" : "Sign up"}</Button>
         </DialogActions>
       </form>
     </Dialog>
   );
 }
 WindowAuthorization.propTypes = {
+  target: PropTypes.string.isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
