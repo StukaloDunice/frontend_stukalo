@@ -8,19 +8,19 @@ const initialState = {
 
 const authReducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case actionsTypes.AUTHORIZATION_REQUEST:
+    case actionsTypes.AUTH_REQUEST:
       return {
         ...state,
         loading: true,
         error: null,
       };
-    case actionsTypes.AUTHORIZATION_REQUEST_ERROR:
+    case actionsTypes.AUTH_REQUEST_ERROR:
       return {
         ...state,
         loading: false,
         error: action.error,
       };
-    case actionsTypes.AUTHORIZATION_REQUEST_RESPONSE:
+    case actionsTypes.AUTH_REQUEST_SUCCESS:
       return {
         ...state,
         auth: action.payload,

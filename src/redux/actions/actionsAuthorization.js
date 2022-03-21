@@ -1,9 +1,9 @@
 import actionsTypes from '../actionsTypes/actionsTypes';
 
-const requestAuth = () => ({ type: actionsTypes.GET_NEWS_REQUEST });
+const requestAuth = (payload) => ({ type: actionsTypes.AUTH_REQUEST, payload });
 
-const requestAuthSuccess = (payload) => ({ type: actionsTypes.GET_NEWS_RESPONSE, payload });
+const requestAuthSuccess = (payload) => ({ type: actionsTypes.AUTH_REQUEST_SUCCESS, payload });
 
-const requestAuthError = (error) => ({ type: actionsTypes.GET_NEWS_ERROR, error });
+const requestAuthError = (error) => ({ type: actionsTypes.AUTH_REQUEST_ERROR, error });
 
 export { requestAuth, requestAuthSuccess, requestAuthError };

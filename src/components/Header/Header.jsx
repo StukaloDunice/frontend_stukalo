@@ -26,7 +26,7 @@ function Header() {
             News
           </Typography>
           <Button color="inherit" onClick={handleOpen}>Log in</Button>
-          <Button color="inherit">Sign up</Button>
+          <Button color="inherit" onClick={handleOpen}>Sign up</Button>
           <WindowAuthorization open={open} handleClose={handleClose} />
         </Toolbar>
       </AppBar>
