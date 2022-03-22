@@ -25,14 +25,26 @@ function Header() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             News
           </Typography>
-          <Button color="inherit" className="Log-in" onClick={() => {
-            handleOpen();
-            setTarget("Log-in");
-          }}>Log in</Button>
-          <Button color="inherit" className="Sign-up" onClick={() => {
-            handleOpen();
-            setTarget("Sign-up");
-            }}>Sign up</Button>
+          <Button
+            color="inherit"
+            className="log-in"
+            onClick={() => {
+              handleOpen();
+              setTarget('sign-up');
+            }}
+          >
+            Sign up
+          </Button>
+          <Button
+            color="inherit"
+            className="sign-in"
+            onClick={() => {
+              handleOpen();
+              setTarget('sign-in');
+            }}
+          >
+            Sign in
+          </Button>
           <WindowAuthorization open={open} target={target} handleClose={handleClose} />
         </Toolbar>
       </AppBar>

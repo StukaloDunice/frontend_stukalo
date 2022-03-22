@@ -5,7 +5,7 @@ import { requestAuthSuccess, requestAuthError } from '../actions/actionsAuthoriz
 
 function* authWorker(action) {
   try {
-    const { data } = yield call(api.post, '/auth/register', action.payload);
+    const { data } = yield call(api.post, '/auth/login', action.payload);
     yield put(requestAuthSuccess(data));
   } catch (error) {
     yield put(requestAuthError(error));
