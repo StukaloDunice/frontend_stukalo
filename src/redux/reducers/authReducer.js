@@ -30,6 +30,13 @@ const authReducer = (state = initialState, action = {}) => {
         loading: false,
         error: null,
       };
+    case actionsTypes.SIGN_OUT_REQUEST:
+      return {
+        ...state,
+        auth: null,
+        loading: true,
+        error: null,
+      };
     default:
       return state;
   }

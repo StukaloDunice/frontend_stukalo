@@ -2,7 +2,7 @@ import actionsTypes from '../actionsTypes/actionsTypes';
 
 const requestReg = (payload) => ({ type: actionsTypes.REG_REQUEST, payload });
 
-const requestRegSuccess = () => ({ type: actionsTypes.REG_REQUEST_SUCCESS });
+const requestRegSuccess = (payload) => ({ type: actionsTypes.REG_REQUEST_SUCCESS, payload });
 
 const requestRegError = (error) => ({
   type: actionsTypes.REG_REQUEST_ERROR,

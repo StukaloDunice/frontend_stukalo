@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -18,8 +18,11 @@ import { requestAuth } from '../../redux/actions/actionsAuthorization';
 
 function WindowAuthorization(props) {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.authUser);
+  const { auth, loading, error } = useSelector((state) => state.authUser);
   const { open, handleClose, target } = props;
+  useEffect(() => {
+    handleClose();
+  }, [auth]);
   const validate = (values) => {
     const errors = {};
     if (!values.password) {
@@ -60,9 +63,9 @@ function WindowAuthorization(props) {
     },
   });
   formik.values.value = target;
-  // useEffect(() => {
-  //   formik.resetForm();
-  // }, [target]);
+  useEffect(() => {
+    formik.resetForm();
+  }, [target]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit}>
