@@ -1,6 +1,5 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 
-import api from '../../api/api';
 import actionsTypes from '../actionsTypes/actionsTypes';
 import {
   requestSignOutSuccess,

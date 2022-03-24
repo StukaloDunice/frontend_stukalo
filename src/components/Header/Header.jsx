@@ -6,20 +6,21 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import WindowAuthorization from '../WindowAuthorization/WindowAuthorization';
 
+import WindowAuthorization from '../WindowAuthorization/WindowAuthorization';
 import { requestSignOut } from '../../redux/actions/actionsAuthorization';
 
 function Header() {
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
-  const [target, setTarget] = useState(null);
   const { auth } = useSelector((state) => state.authUser);
+
+  const [open, setOpen] = useState(false);
+  const [target, setTarget] = useState('');
+
   const handleOpen = () => {
     setOpen(true);
   };
 
-  // function to handle modal close
   const handleClose = () => {
     setOpen(false);
   };

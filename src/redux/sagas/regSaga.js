@@ -1,12 +1,12 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 
 import api from '../../api/api';
+import { setToken } from '../../lib/localstorage';
 import actionsTypes from '../actionsTypes/actionsTypes';
 import {
   requestRegSuccess,
   requestRegError,
 } from '../actions/actionsRegistration';
-import { setToken } from '../../lib/localstorage';
 
 function* regWorker(action) {
   try {
