@@ -3,8 +3,10 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import api from '../../api/api';
 import actionsTypes from '../actionsTypes/actionsTypes';
 import {
-  requestAuthSuccess, requestAuthError,
-  requestSignOutSuccess, requestSignOutError,
+  requestAuthSuccess,
+  requestAuthError,
+  requestSignOutSuccess,
+  requestSignOutError,
 } from '../actions/actionsAuthorization';
 import { setToken } from '../../lib/localstorage';
 
@@ -18,18 +20,8 @@ function* authWorker(action) {
   }
 }
 
-function* signOutWorker() {
-  try {
-    yield localStorage.removeItem('token');
-    yield put(requestSignOutSuccess());
-  } catch (error) {
-    yield put(requestSignOutError(error));
-  }
-}
-
 function* authSaga() {
   yield takeLatest(actionsTypes.AUTH_REQUEST, authWorker);
-  yield takeLatest(actionsTypes.SIGN_OUT_REQUEST, signOutWorker);
 }
 
 export default authSaga;

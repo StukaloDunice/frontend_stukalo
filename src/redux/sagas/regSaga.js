@@ -7,14 +7,12 @@ import {
   requestRegError,
 } from '../actions/actionsRegistration';
 import { setToken } from '../../lib/localstorage';
-import { requestAuth } from '../actions/actionsAuthorization';
 
 function* regWorker(action) {
   try {
     const { data } = yield call(api.post, '/auth/register', action.payload);
     yield setToken(data);
-    yield put(requestRegSuccess(action.payload));
-    yield put(requestAuth(data));
+    yield put(requestRegSuccess(action.payload.email));
   } catch (error) {
     yield put(requestRegError(error));
   }

@@ -26,15 +26,27 @@ const authReducer = (state = initialState, action = {}) => {
     case actionsTypes.REG_REQUEST_SUCCESS:
       return {
         ...state,
-        auth: action.payload,
+        auth: { email: action.payload },
         loading: false,
         error: null,
       };
     case actionsTypes.SIGN_OUT_REQUEST:
       return {
         ...state,
-        auth: null,
         loading: true,
+        error: null,
+      };
+    case actionsTypes.SIGN_OUT_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.SIGN_OUT_SUCCESS:
+      return {
+        ...state,
+        auth: null,
+        loading: false,
         error: null,
       };
     default:
