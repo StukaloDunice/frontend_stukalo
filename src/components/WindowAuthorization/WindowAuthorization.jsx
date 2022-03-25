@@ -23,6 +23,7 @@ function WindowAuthorization(props) {
   useEffect(() => {
     handleClose();
   }, [auth]);
+  const currentForm = target === 'sign-up' ? 'Sign up' : 'Sign in';
   const validate = (values) => {
     const errors = {};
     if (!values.password) {
@@ -47,7 +48,7 @@ function WindowAuthorization(props) {
 
   const formik = useFormik({
     initialValues: {
-      value: '',
+      value: target,
       email: '',
       username: '',
       password: '',
@@ -62,14 +63,13 @@ function WindowAuthorization(props) {
       resetForm();
     },
   });
-  formik.values.value = target;
   useEffect(() => {
     formik.resetForm();
   }, [target]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit}>
-        <DialogTitle>{target === 'sign-up' ? 'Sign up' : 'Sign in'}</DialogTitle>
+        <DialogTitle>{currentForm}</DialogTitle>
         {error && (<Alert severity="error">{error}</Alert>)}
         <DialogContent>
           {target === 'sign-up' ? (
@@ -119,7 +119,7 @@ function WindowAuthorization(props) {
       && <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box>}
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">{target === 'sign-up' ? 'sign up' : 'sign in'}</Button>
+          <Button type="submit">{currentForm}</Button>
         </DialogActions>
       </form>
     </Dialog>
