@@ -6,7 +6,6 @@
 # My files
 .env
 .history
-.eslintrc.json
 
 # Node artifact files
 node_modules/
