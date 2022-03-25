@@ -56,15 +56,26 @@ function Header() {
             </>
           )}
           {auth && (
-            <Button
-              color="inherit"
-              className="sign-out"
-              onClick={() => {
-                dispatch(requestSignOut());
-              }}
-            >
-              Sign out
-            </Button>
+            <>
+              <Button
+                color="inherit"
+                className="sign-out"
+                onClick={() => {
+                  dispatch(requestSignOut());
+                }}
+              >
+                My Profile
+              </Button>
+              <Button
+                color="inherit"
+                className="sign-out"
+                onClick={() => {
+                  dispatch(requestSignOut());
+                }}
+              >
+                Sign out
+              </Button>
+            </>
           )}
           <WindowAuthorization open={open} target={target} handleClose={handleClose} />
         </Toolbar>

@@ -2,6 +2,7 @@ import actionsTypes from '../actionsTypes/actionsTypes';
 
 const initialState = {
   auth: null,
+  current: null,
   loading: false,
   error: null,
 };
@@ -48,6 +49,24 @@ const authReducer = (state = initialState, action = {}) => {
         auth: null,
         loading: false,
         error: null,
+      };
+    case actionsTypes.USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionsTypes.USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.USER_SUCCESS:
+      return {
+        ...state,
+        auth: action.payload,
+        loading: false,
+        error: false,
       };
     default:
       return state;
