@@ -70,7 +70,7 @@ function WindowAuthorization(props) {
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit}>
         <DialogTitle>{target === 'sign-up' ? 'Sign up' : 'Sign in'}</DialogTitle>
-        {error && (<Alert severity="error">{error.message}</Alert>)}
+        {error && (<Alert severity="error">{error}</Alert>)}
         <DialogContent>
           {target === 'sign-up' ? (
             <TextField

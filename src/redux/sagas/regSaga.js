@@ -14,7 +14,7 @@ function* regWorker(action) {
     yield setToken(data);
     yield put(requestRegSuccess(action.payload.email));
   } catch (error) {
-    yield put(requestRegError(error));
+    yield put(requestRegError(error.response.data.message));
   }
 }
 

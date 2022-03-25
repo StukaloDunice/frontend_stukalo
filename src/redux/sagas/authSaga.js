@@ -14,7 +14,7 @@ function* authWorker(action) {
     yield setToken(data);
     yield put(requestAuthSuccess(action.payload.email));
   } catch (error) {
-    yield put(requestAuthError(error));
+    yield put(requestAuthError(error.response.data.message));
   }
 }
 

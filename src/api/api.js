@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 import { getToken } from '../lib/localstorage';
 
 const api = axios.create({
@@ -10,7 +11,7 @@ api.interceptors.request.use(
     const { headers } = config;
     const token = getToken();
     if (token) {
-      headers.Authorization = `Bearer ${token}`;
+      headers.Authorization = token;
     }
     return config;
   },
