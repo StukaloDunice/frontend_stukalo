@@ -115,8 +115,9 @@ function WindowAuthorization(props) {
             onChange={formik.handleChange}
           />
         </DialogContent>
-        {loading
-      && <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box>}
+        {loading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}><CircularProgress /></Box>
+        )}
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button type="submit">{currentForm}</Button>
