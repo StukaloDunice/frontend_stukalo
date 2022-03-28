@@ -9,6 +9,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
 import { requestCurrentUser } from '../../redux/actions/actionsUser';
+import CardNews from '../../components/CardNews/CardNews';
 
 function UserPage() {
   const dispatch = useDispatch();
@@ -31,21 +32,24 @@ function UserPage() {
       </Box>
     );
   }
-  return (
-    <>
-      <Avatar
-        alt="Remy Sharp"
-        src="/public/images/avatar.jpg"
-        sx={{ width: 100, height: 100 }}
-      />
-      <Typography gutterBottom variant="h5">
-        {current.username}
-      </Typography>
-      <div className="main-page">
-        News
-      </div>
-    </>
-  );
+  if (current) {
+    return (
+      <>
+        <Avatar
+          alt="Remy Sharp"
+          src="/public/images/avatar.jpg"
+          sx={{ width: 250, height: 250 }}
+        />
+        <Typography gutterBottom variant="h5">
+          {current.username}
+        </Typography>
+        <div className="user-page">
+          {current.news.map((item) => <CardNews key={item.id} data={item} />)}
+        </div>
+      </>
+    );
+  }
+  return null;
 }
 
 export default UserPage;

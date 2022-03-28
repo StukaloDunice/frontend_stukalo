@@ -7,8 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 function CardNews(props) {
-  console.log(props);
   const { data } = props;
+  console.log(data);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
