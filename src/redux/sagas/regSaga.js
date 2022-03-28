@@ -7,7 +7,7 @@ import {
   requestRegSuccess,
   requestRegError,
 } from '../actions/actionsRegistration';
-import { requestUser } from '../actions/actionsCurrentUser';
+import { requestUser } from '../actions/actionsUser';
 
 function* regWorker(action) {
   try {

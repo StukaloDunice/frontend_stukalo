@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 function CardNews(props) {
+  console.log(props);
   const { data } = props;
   return (
     <Card sx={{ maxWidth: 345 }}>
@@ -42,6 +43,7 @@ CardNews.propTypes = {
     image: PropTypes.string.isRequired,
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
+      avatar: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };
