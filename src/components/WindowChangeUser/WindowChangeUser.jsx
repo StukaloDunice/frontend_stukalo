@@ -47,11 +47,12 @@ function WindowChangeUser(props) {
     },
   });
   const submitFile = useCallback((event) => {
-    console.log(event.target);
+    const data = new FormData();
     const [files] = event.target.files;
-    console.log(event.target.files[0]);
+    data.append('avatar', files);
+    console.log(data);
     formik.initialValues.file = files;
-  }, [event.target.files]);
+  }, [formik.initialValues.file]);
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit}>
@@ -80,7 +81,10 @@ function WindowChangeUser(props) {
             fullWidth
             name="file"
             onBlur={formik.handleBlur}
-            onChange={submitFile}
+            onChange={(event) => {
+              submitFile(event);
+              console.log(formik.initialValues.file);
+            }}
           />
         </DialogContent>
         {loading && (
