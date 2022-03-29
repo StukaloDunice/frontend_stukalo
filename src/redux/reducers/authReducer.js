@@ -86,6 +86,11 @@ const authReducer = (state = initialState, action = {}) => {
         loading: false,
         error: false,
       };
+    case actionsTypes.RESET_CURRENT_USER:
+      return {
+        ...state,
+        current: null,
+      };
     default:
       return state;
   }

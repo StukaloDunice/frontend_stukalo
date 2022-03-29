@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable react/jsx-wrap-multilines */
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,19 +8,33 @@ import { Typography } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 import { requestCurrentUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
+import WindowChangeUser from '../../components/WindowChangeUser/WindowChangeUser';
+import WindowAddNews from '../../components/WindowAddNews/WindowAddNews';
+
+import './style.css';
 
 function UserPage() {
+  const [open, setOpen] = useState(false);
+  const [target, setTarget] = useState('');
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => dispatch(requestCurrentUser(id)), [dispatch, id]);
   const {
-    loading, error, current,
+    loading, error, current, auth,
   } = useSelector((state) => state.authUser);
-  // const {} = current;
-  console.log(current);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   if (error) {
     return (
       <Alert severity="error">{error.message}</Alert>
@@ -35,17 +50,46 @@ function UserPage() {
   if (current) {
     return (
       <>
-        <Avatar
-          alt="Remy Sharp"
-          src="/public/images/avatar.jpg"
-          sx={{ width: 250, height: 250 }}
-        />
-        <Typography gutterBottom variant="h5">
-          {current.username}
-        </Typography>
-        <div className="user-page">
-          {current.news.map((item) => <CardNews key={item.id} data={item} />)}
+        <div className="user-page__info">
+          <Avatar
+            alt="Remy Sharp"
+            src="/public/images/avatar.jpg"
+            sx={{ width: 250, height: 250 }}
+          />
+          <Typography gutterBottom variant="h5">
+            {current.username}
+          </Typography>
+          {current.id === auth.id && (
+          <div className="buttons-add-editing">
+            <Button
+              variant="contained"
+              onClick={() => {
+                setTarget('add-news');
+                handleOpen();
+              }}
+            >
+              Add news
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                setTarget('editing-user');
+                handleOpen();
+              }}
+            >
+              Editing user
+            </Button>
+          </div>
+          )}
         </div>
+        <div className="user-page__news">
+          {current.news.map((item) => <CardNews
+            key={item.id}
+            data={{ ...item, user: { username: current.username } }}
+          />)}
+        </div>
+        {target === 'editing-user' && <WindowChangeUser open={open} handleClose={handleClose} />}
+        {target === 'add-news' && <WindowAddNews open={open} handleClose={handleClose} />}
       </>
     );
   }
