@@ -16,7 +16,7 @@ const requestCurrentUserError = (error) => ({ type: actionsTypes.CURRENT_USER_ER
 
 const resetCurrentUser = () => ({ type: actionsTypes.RESET_CURRENT_USER });
 
-const editingUserRequest = (payload) => ({ type: actionsTypes.EDITING_USER_REQUEST, payload });
+const requestEditingUser = (payload) => ({ type: actionsTypes.EDITING_USER_REQUEST, payload });
 
 const editingUserSuccess = (payload) => ({ type: actionsTypes.EDITING_USER_SUCCESS, payload });
 
@@ -25,6 +25,6 @@ const editingUserError = (payload) => ({ type: actionsTypes.EDITING_USER_ERROR, 
 export {
   requestUser, requestUserSuccess, requestUserError,
   requestCurrentUser, requestCurrentUserSuccess, requestCurrentUserError,
-  resetCurrentUser, editingUserRequest, editingUserSuccess,
+  resetCurrentUser, requestEditingUser, editingUserSuccess,
   editingUserError,
 };

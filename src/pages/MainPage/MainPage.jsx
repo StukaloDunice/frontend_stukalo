@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 
 import { requestNews } from '../../redux/actions/actionsNews';
-import { resetCurrentUser } from '../../redux/actions/actionsUser';
+import { requestUser, resetCurrentUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
 
 import './style.css';
@@ -15,6 +15,7 @@ function MainPage() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(requestNews());
+    dispatch(requestUser());
     dispatch(resetCurrentUser());
   }, [dispatch]);
   const { news, error, loading } = useSelector((state) => state.allNews);

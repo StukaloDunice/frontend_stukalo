@@ -22,7 +22,9 @@ function UserPage() {
   const [target, setTarget] = useState('');
   const dispatch = useDispatch();
   const { id } = useParams();
-  useEffect(() => dispatch(requestCurrentUser(id)), [dispatch, id]);
+  useEffect(() => {
+    dispatch(requestCurrentUser(id));
+  }, [dispatch, id]);
   const {
     loading, error, current, auth,
   } = useSelector((state) => state.authUser);
@@ -53,11 +55,11 @@ function UserPage() {
         <div className="user-page__info">
           <Avatar
             alt="Remy Sharp"
-            src="/public/images/avatar.jpg"
+            src={`${process.env.REACT_APP_API_URL}${auth.avatar}`}
             sx={{ width: 250, height: 250 }}
           />
           <Typography gutterBottom variant="h5">
-            {current.username}
+            {auth.username}
           </Typography>
           {current.id === auth.id && (
           <div className="buttons-add-editing">

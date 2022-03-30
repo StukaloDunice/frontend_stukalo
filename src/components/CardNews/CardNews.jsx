@@ -13,7 +13,7 @@ function CardNews(props) {
       <CardMedia
         component="img"
         height="140"
-        image={data.image}
+        image={`${process.env.REACT_APP_API_URL}${data.image}`}
         alt={data.image}
       />
       <CardContent>

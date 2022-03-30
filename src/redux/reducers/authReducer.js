@@ -91,6 +91,42 @@ const authReducer = (state = initialState, action = {}) => {
         ...state,
         current: null,
       };
+    case actionsTypes.EDITING_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionsTypes.EDITING_USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.EDITING_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        auth: action.payload,
+      };
+    case actionsTypes.ADD_NEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionsTypes.ADD_NEWS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.ADD_NEWS_SUCCESS:
+      return {
+        ...state,
+        current: { ...state.current, news: [...state.current.news, action.payload] },
+        loading: false,
+        error: null,
+      };
     default:
       return state;
   }

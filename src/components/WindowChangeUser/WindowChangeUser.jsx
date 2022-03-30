@@ -14,11 +14,13 @@ import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Input from '@mui/material/Input';
 
-import { editingUserRequest } from '../../redux/actions/actionsUser';
+import { requestEditingUser } from '../../redux/actions/actionsUser';
 
 function WindowChangeUser(props) {
   const dispatch = useDispatch();
-  const { current, error, loading } = useSelector((state) => state.authUser);
+  const {
+    current, error, loading,
+  } = useSelector((state) => state.authUser);
   const {
     open, handleClose,
   } = props;
@@ -26,8 +28,8 @@ function WindowChangeUser(props) {
     const errors = {};
     if (!values.username) {
       errors.username = 'Required';
-    } else if (values.username.length > 20) {
-      errors.username = 'Must be 20 characters or less';
+    } else if (values.username.length > 35) {
+      errors.username = 'Must be 35 characters or less';
     }
     if (!values.file) {
       errors.file = 'Required';
@@ -42,20 +44,18 @@ function WindowChangeUser(props) {
     },
     validate,
     onSubmit: (values, { resetForm }) => {
-      dispatch(editingUserRequest(values));
+      dispatch(requestEditingUser({ ...values, id: current.id }));
       resetForm();
+      handleClose();
     },
   });
-  const submitFile = useCallback((event) => {
-    const data = new FormData();
+  const changeFile = useCallback((event) => {
     const [files] = event.target.files;
-    data.append('avatar', files);
-    console.log(data);
-    formik.initialValues.file = files;
-  }, [formik.initialValues.file]);
+    formik.values.file = files;
+  }, [formik.values]);
   return (
     <Dialog open={open} onClose={handleClose}>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} encType=" multipart/form-data ">
         <DialogTitle>Editing user</DialogTitle>
         {error && (<Alert severity="error">{error}</Alert>)}
         <DialogContent>
@@ -81,10 +81,7 @@ function WindowChangeUser(props) {
             fullWidth
             name="file"
             onBlur={formik.handleBlur}
-            onChange={(event) => {
-              submitFile(event);
-              console.log(formik.initialValues.file);
-            }}
+            onChange={changeFile}
           />
         </DialogContent>
         {loading && (
