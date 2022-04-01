@@ -135,12 +135,6 @@ function WindowAddNews(props) {
 WindowAddNews.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  // current: PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   username: PropTypes.string.isRequired,
-  //   email: PropTypes.string.isRequired,
-  //   avatar: PropTypes.isRequired,
-  // }).isRequired,
 };
 
 export default WindowAddNews;

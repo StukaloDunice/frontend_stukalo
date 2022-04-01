@@ -64,9 +64,6 @@ function Header() {
                 <Button
                   color="inherit"
                   className="sign-out"
-                  // onClick={() => {
-                  //   <Link to="/user">Home</Link>;
-                  // }}
                 >
                   <Link to={`/users/${auth.id}`}>My Profile</Link>
                 </Button>
