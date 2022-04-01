@@ -47,6 +47,7 @@ function WindowChangeUser(props) {
     onSubmit: (values, { resetForm }) => {
       dispatch(requestEditingUser({ ...values, id: current.id }));
       resetForm();
+      handleClose();
     },
   });
 
