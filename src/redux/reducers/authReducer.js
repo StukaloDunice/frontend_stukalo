@@ -86,11 +86,6 @@ const authReducer = (state = initialState, action = {}) => {
         loading: false,
         error: false,
       };
-    case actionsTypes.RESET_CURRENT_USER:
-      return {
-        ...state,
-        current: null,
-      };
     case actionsTypes.EDITING_USER_REQUEST:
       return {
         ...state,

@@ -18,8 +18,6 @@ export const requestCurrentUserError = (error) => ({
   type: actionsTypes.CURRENT_USER_ERROR, error,
 });
 
-export const resetCurrentUser = () => ({ type: actionsTypes.RESET_CURRENT_USER });
-
 export const requestEditingUser = (payload) => ({
   type: actionsTypes.EDITING_USER_REQUEST, payload,
 });
