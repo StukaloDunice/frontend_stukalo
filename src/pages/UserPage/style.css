@@ -1,0 +1,21 @@
+.user-page__info {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.user-page__news {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 50px 50px;
+  gap: 15px;
+}
+
+.buttons-add-editing {
+  display: flex;
+  gap: 25px;
+}

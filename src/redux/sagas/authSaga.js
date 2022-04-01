@@ -7,12 +7,14 @@ import {
   requestAuthSuccess,
   requestAuthError,
 } from '../actions/actionsAuthorization';
+import { requestUser } from '../actions/actionsUser';
 
 function* authWorker(action) {
   try {
     const { data } = yield call(api.post, '/auth/login', action.payload);
     yield setToken(data);
     yield put(requestAuthSuccess(action.payload.email));
+    yield put(requestUser());
   } catch (error) {
     yield put(requestAuthError(error.response.data.message));
   }

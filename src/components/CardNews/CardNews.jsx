@@ -1,19 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
+import './style.css';
+
 function CardNews(props) {
   const { data } = props;
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 440 }}>
       <CardMedia
         component="img"
-        height="140"
-        image={data.image}
+        height="300"
+        image={`${process.env.REACT_APP_API_URL}${data.image}`}
         alt={data.image}
       />
       <CardContent>
@@ -27,7 +30,7 @@ function CardNews(props) {
           {data.tags}
         </Typography>
         <Typography gutterBottom variant="subtitle2">
-          {data.user.username}
+          <Link to={`/users/${data.user.id}`} className="user-name">{data.user.username}</Link>
         </Typography>
       </CardContent>
     </Card>
@@ -39,9 +42,11 @@ CardNews.propTypes = {
     title: PropTypes.string.isRequired,
     content: PropTypes.string.isRequired,
     tags: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
+    image: PropTypes.string,
     user: PropTypes.shape({
+      id: PropTypes.number.isRequired,
       username: PropTypes.string.isRequired,
+      avatar: PropTypes.string,
     }).isRequired,
   }).isRequired,
 };

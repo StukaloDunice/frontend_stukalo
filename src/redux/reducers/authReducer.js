@@ -2,6 +2,7 @@ import actionsTypes from '../actionsTypes/actionsTypes';
 
 const initialState = {
   auth: null,
+  current: null,
   loading: false,
   error: null,
 };
@@ -46,6 +47,78 @@ const authReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         auth: null,
+        loading: false,
+        error: null,
+      };
+    case actionsTypes.USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionsTypes.USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.USER_SUCCESS:
+      return {
+        ...state,
+        auth: action.payload,
+        loading: false,
+        error: false,
+      };
+    case actionsTypes.CURRENT_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionsTypes.CURRENT_USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.CURRENT_USER_SUCCESS:
+      return {
+        ...state,
+        current: action.payload,
+        loading: false,
+        error: false,
+      };
+    case actionsTypes.EDITING_USER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case actionsTypes.EDITING_USER_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.EDITING_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        auth: action.payload,
+      };
+    case actionsTypes.ADD_NEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+    case actionsTypes.ADD_NEWS_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: action.error,
+      };
+    case actionsTypes.ADD_NEWS_SUCCESS:
+      return {
+        ...state,
+        current: { ...state.current, news: [...state.current.news, action.payload] },
         loading: false,
         error: null,
       };
