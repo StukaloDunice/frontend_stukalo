@@ -24,6 +24,7 @@ function WindowChangeUser(props) {
   const {
     open, handleClose,
   } = props;
+
   const validate = (values) => {
     const errors = {};
     if (!values.username) {
@@ -46,13 +47,14 @@ function WindowChangeUser(props) {
     onSubmit: (values, { resetForm }) => {
       dispatch(requestEditingUser({ ...values, id: current.id }));
       resetForm();
-      handleClose();
     },
   });
+
   const changeFile = useCallback((event) => {
     const [files] = event.target.files;
     formik.values.file = files;
   }, [formik.values]);
+
   return (
     <Dialog open={open} onClose={handleClose}>
       <form onSubmit={formik.handleSubmit} encType=" multipart/form-data ">
@@ -98,12 +100,6 @@ function WindowChangeUser(props) {
 WindowChangeUser.propTypes = {
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
-  // current: PropTypes.shape({
-  //   id: PropTypes.number.isRequired,
-  //   username: PropTypes.string.isRequired,
-  //   email: PropTypes.string.isRequired,
-  //   avatar: PropTypes.isRequired,
-  // }).isRequired,
 };
 
 export default WindowChangeUser;
