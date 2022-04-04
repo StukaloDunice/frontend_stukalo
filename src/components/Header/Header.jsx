@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useParams, useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppBar from '@mui/material/AppBar';
@@ -20,6 +20,8 @@ function Header() {
   const [open, setOpen] = useState(false);
   const [target, setTarget] = useState('');
 
+  const tokenInUrl = window.location.pathname.split('/');
+  console.log(tokenInUrl[tokenInUrl.length-1]); //yields: "/js" (where snippets run)
   const handleOpen = () => {
     setOpen(true);
   };
