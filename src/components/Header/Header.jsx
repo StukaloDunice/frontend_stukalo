@@ -27,6 +27,10 @@ function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const google = () => {
+    window.open('http://localhost:3000/auth/google', '_self');
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -37,6 +41,13 @@ function Header() {
             </Typography>
             {!auth && (
               <>
+                <Button
+                  color="inherit"
+                  className="google"
+                  onClick={google}
+                >
+                  Google
+                </Button>
                 <Button
                   color="inherit"
                   className="log-in"
