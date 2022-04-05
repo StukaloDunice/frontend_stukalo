@@ -13,7 +13,7 @@ import { requestUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
 import WindowChangeUser from '../../components/WindowChangeUser/WindowChangeUser';
 import WindowAddNews from '../../components/WindowAddNews/WindowAddNews';
-import typePhoto from '../../lib/typePhoto';
+import returnImage from '../../lib/returnImage';
 
 import './style.css';
 
@@ -55,7 +55,7 @@ function UserPage() {
         <div className="user-page__info">
           <Avatar
             alt="Remy Sharp"
-            src={typePhoto(current.avatar)}
+            src={returnImage(current.avatar)}
             sx={{ width: 250, height: 250 }}
           />
           <Typography gutterBottom variant="h5">

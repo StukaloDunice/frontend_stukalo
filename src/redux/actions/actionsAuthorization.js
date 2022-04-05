@@ -15,7 +15,9 @@ export const requestAuthError = (error) => ({
   error,
 });
 
-export const requestSignOut = () => ({ type: actionsTypes.SIGN_OUT_REQUEST });
+export const requestSignOut = () => ({
+  type: actionsTypes.SIGN_OUT_REQUEST,
+});
 
 export const requestSignOutSuccess = () => ({
   type: actionsTypes.SIGN_OUT_SUCCESS,

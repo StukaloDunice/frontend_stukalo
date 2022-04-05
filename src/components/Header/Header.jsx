@@ -28,8 +28,8 @@ function Header() {
     setOpen(false);
   };
 
-  const google = () => {
-    window.open('http://localhost:3000/auth/google', '_self');
+  const openWindowGoogle = () => {
+    window.open(`${process.env.REACT_APP_API_URL}auth/google`, '_self');
   };
   return (
     <>
@@ -44,9 +44,9 @@ function Header() {
                 <Button
                   color="inherit"
                   className="google"
-                  onClick={google}
+                  onClick={openWindowGoogle}
                 >
-                  Google
+                  Log in with google
                 </Button>
                 <Button
                   color="inherit"
