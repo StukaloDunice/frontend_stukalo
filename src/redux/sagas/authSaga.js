@@ -12,7 +12,7 @@ import { requestUser } from '../actions/actionsUser';
 function* authWorker(action) {
   try {
     const { data } = yield call(api.post, '/auth/login', action.payload);
-    yield setToken(data);
+    yield call(setToken, data);
     yield put(requestAuthSuccess(action.payload.email));
     yield put(requestUser());
   } catch (error) {

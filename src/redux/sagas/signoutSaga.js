@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 
 import actionsTypes from '../actionsTypes/actionsTypes';
 import {
@@ -9,7 +9,7 @@ import { deleteToken } from '../../lib/localstorage';
 
 function* signOutWorker() {
   try {
-    yield deleteToken();
+    yield call(deleteToken);
     yield put(requestSignOutSuccess());
   } catch (error) {
     yield put(requestSignOutError(error));

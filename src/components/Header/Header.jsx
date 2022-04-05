@@ -27,6 +27,10 @@ function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const openWindowGoogle = () => {
+    window.open(`${process.env.REACT_APP_API_URL}auth/google`, '_self');
+  };
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -37,6 +41,13 @@ function Header() {
             </Typography>
             {!auth && (
               <>
+                <Button
+                  color="inherit"
+                  className="google"
+                  onClick={openWindowGoogle}
+                >
+                  Log in with google
+                </Button>
                 <Button
                   color="inherit"
                   className="log-in"

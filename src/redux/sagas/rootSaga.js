@@ -7,9 +7,11 @@ import userSaga from './requestUserSaga';
 import currentUserSaga from './currentUserSaga';
 import editingUserSaga from './editingUserSaga';
 import addNewsSaga from './addNewsSaga';
+import googleAuthSaga from './googleAuthSaga';
 
 export default function* rootSaga() {
   yield all([newsSaga(), regSaga(), authSaga(),
     signOutSaga(), userSaga(), currentUserSaga(),
-    editingUserSaga(), addNewsSaga()]);
+    editingUserSaga(), addNewsSaga(),
+    googleAuthSaga()]);
 }

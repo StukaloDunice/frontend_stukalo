@@ -9,10 +9,11 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
-import { requestCurrentUser, requestUser } from '../../redux/actions/actionsUser';
+import { requestUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
 import WindowChangeUser from '../../components/WindowChangeUser/WindowChangeUser';
 import WindowAddNews from '../../components/WindowAddNews/WindowAddNews';
+import returnImage from '../../lib/returnImage';
 
 import './style.css';
 
@@ -20,8 +21,7 @@ function UserPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
-    dispatch(requestUser());
-    dispatch(requestCurrentUser(id));
+    dispatch(requestUser(id));
   }, [dispatch, id]);
   const {
     loading, error, current, auth,
@@ -55,7 +55,7 @@ function UserPage() {
         <div className="user-page__info">
           <Avatar
             alt="Remy Sharp"
-            src={`${process.env.REACT_APP_API_URL}${current.avatar}`}
+            src={returnImage(current.avatar)}
             sx={{ width: 250, height: 250 }}
           />
           <Typography gutterBottom variant="h5">
