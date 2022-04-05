@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -19,6 +19,10 @@ function MainPage() {
     dispatch(requestUser());
   }, [dispatch]);
   const { news, error, loading } = useSelector((state) => state.allNews);
+  const [filteredNews, setFilteredNews] = useState([]);
+  useEffect(() =>{
+    setFilteredNews(news);
+  },[news]);
   if (error) {
     return (
       <Alert severity="error">{error.message}</Alert>
@@ -31,14 +35,16 @@ function MainPage() {
       </Box>
     );
   }
-  return (
-    <>
-      <Search />
-      <div className="main-page">
-        {news.map((item) => <CardNews key={item.id} data={item} />)}
-      </div>
-    </>
-  );
+    return (
+      <>
+        <>
+          <Search setFilteredNews={setFilteredNews} news={news} />
+        </>
+        {Boolean(filteredNews.length) && (<div className="main-page">
+          {filteredNews.map((item) => <CardNews key={item.id} data={item} />)}
+        </div>)}
+      </>
+    );
 }
 
 export default MainPage;

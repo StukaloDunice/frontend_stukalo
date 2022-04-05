@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppBar from '@mui/material/AppBar';
@@ -16,7 +16,7 @@ import './style.css';
 function Header() {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => state.authUser);
-
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [target, setTarget] = useState('');
 
@@ -82,10 +82,11 @@ function Header() {
                   color="inherit"
                   className="sign-out"
                   onClick={() => {
+                    navigate('/');
                     dispatch(requestSignOut());
                   }}
                 >
-                  <Link to="/">Sign out</Link>
+                  Sign out
                 </Button>
               </>
             )}
