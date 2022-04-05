@@ -1,11 +1,11 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 
 import { setToken } from '../../lib/localstorage';
 import actionsTypes from '../actionsTypes/actionsTypes';
 import { requestUser } from '../actions/actionsUser';
 
 function* googleAuthWorker(action) {
-  yield setToken(action.payload);
+  yield call(setToken, action.payload);
   yield put(requestUser());
 }
 
