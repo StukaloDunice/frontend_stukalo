@@ -1,6 +1,6 @@
 import actionsTypes from '../actionsTypes/actionsTypes';
 
-export const requestUser = () => ({ type: actionsTypes.USER_REQUEST });
+export const requestUser = (payload) => ({ type: actionsTypes.USER_REQUEST, payload });
 
 export const requestUserSuccess = (payload) => ({ type: actionsTypes.USER_SUCCESS, payload });
 

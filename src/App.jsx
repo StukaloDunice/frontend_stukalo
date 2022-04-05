@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import MainPage from './pages/MainPage/MainPage';
 import UserPage from './pages/UserPage/UserPage';
+import GetToken from './components/GetToken/GetToken';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route index path="/" element={<MainPage />} />
         <Route path="users/:id" element={<UserPage />} />
+        <Route path="/:token" element={<GetToken />} />
       </Routes>
     </BrowserRouter>
   );

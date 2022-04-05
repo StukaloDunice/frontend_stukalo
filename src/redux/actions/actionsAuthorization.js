@@ -26,16 +26,7 @@ export const requestSignOutError = (error) => ({
   error,
 });
 
-export const requestGoogleAuthrization = () => ({
+export const requestGoogleAuthorization = (payload) => ({
   type: actionsTypes.GOOGLE_AUTH_REQUEST,
-});
-
-export const requestGoogleAuthrizationError = (error) => ({
-  type: actionsTypes.GOOGLE_AUTH_ERROR,
-  error,
-});
-
-export const requestGoogleAuthrizationSuccess = (payload) => ({
-  type: actionsTypes.GOOGLE_AUTH_SUCCESS,
   payload,
 });
