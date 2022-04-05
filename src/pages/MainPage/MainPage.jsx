@@ -8,6 +8,7 @@ import Alert from '@mui/material/Alert';
 import { requestNews } from '../../redux/actions/actionsNews';
 import { requestUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
+import Search from '../../components/Search/Search';
 
 import './style.css';
 
@@ -31,9 +32,12 @@ function MainPage() {
     );
   }
   return (
-    <div className="main-page">
-      {news.map((item) => <CardNews key={item.id} data={item} />)}
-    </div>
+    <>
+      <Search />
+      <div className="main-page">
+        {news.map((item) => <CardNews key={item.id} data={item} />)}
+      </div>
+    </>
   );
 }
 
