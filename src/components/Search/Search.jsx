@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import TextField from '@mui/material/TextField';
 import DialogContent from '@mui/material/DialogContent';
@@ -7,21 +8,21 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Box from '@mui/material/Box';
 
-import filtrationNews from '../../lib/filtrationNews';
+import filterNews from '../../lib/filterNews';
 
 import './style.css';
 
 function Search(props) {
-  const {setFilteredNews, news } = props;
+  const { setFilteredNews, news } = props;
   const [textInput, setTextInput] = useState('');
   const [tab, setTab] = useState('all');
-  const vsp = useMemo(() => filtrationNews(textInput, tab, news), [textInput, tab]);
+  const filteredNews = useMemo(() => filterNews(textInput, tab, news), [textInput, tab]);
   useEffect(() => {
-    setFilteredNews(vsp);
-  }, [vsp]);
+    setFilteredNews(filteredNews);
+  }, [filteredNews]);
 
   return (
-    <div className='search-news'>
+    <div className="search-news">
       <Box
         sx={{
           width: 500,
@@ -74,8 +75,25 @@ function Search(props) {
           }}
         />
       </RadioGroup>
-    </ div>
+    </div>
   );
 }
+
+Search.propTypes = {
+  news: PropTypes.arrayOf(PropTypes.shape(
+    {
+      title: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+      image: PropTypes.string,
+      user: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        username: PropTypes.string.isRequired,
+        avatar: PropTypes.string,
+      }).isRequired,
+    }.isRequired,
+  )).isRequired,
+  setFilteredNews: PropTypes.func.isRequired,
+};
 
 export default Search;

@@ -20,9 +20,9 @@ function MainPage() {
   }, [dispatch]);
   const { news, error, loading } = useSelector((state) => state.allNews);
   const [filteredNews, setFilteredNews] = useState([]);
-  useEffect(() =>{
+  useEffect(() => {
     setFilteredNews(news);
-  },[news]);
+  }, [news]);
   if (error) {
     return (
       <Alert severity="error">{error.message}</Alert>
@@ -35,16 +35,14 @@ function MainPage() {
       </Box>
     );
   }
-    return (
-      <>
-        <>
-          <Search setFilteredNews={setFilteredNews} news={news} />
-        </>
-        {Boolean(filteredNews.length) && (<div className="main-page">
-          {filteredNews.map((item) => <CardNews key={item.id} data={item} />)}
-        </div>)}
-      </>
-    );
+  return (
+    <>
+      <Search setFilteredNews={setFilteredNews} news={news} />
+      <div className="main-page">
+        {filteredNews.map((item) => <CardNews key={item.id} data={item} />)}
+      </div>
+    </>
+  );
 }
 
 export default MainPage;
