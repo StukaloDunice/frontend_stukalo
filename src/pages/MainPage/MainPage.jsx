@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CircularProgress from '@mui/material/CircularProgress';
@@ -8,6 +8,7 @@ import Alert from '@mui/material/Alert';
 import { requestNews } from '../../redux/actions/actionsNews';
 import { requestUser } from '../../redux/actions/actionsUser';
 import CardNews from '../../components/CardNews/CardNews';
+import Search from '../../components/Search/Search';
 
 import './style.css';
 
@@ -18,6 +19,10 @@ function MainPage() {
     dispatch(requestUser());
   }, [dispatch]);
   const { news, error, loading } = useSelector((state) => state.allNews);
+  const [filteredNews, setFilteredNews] = useState([]);
+  useEffect(() => {
+    setFilteredNews(news);
+  }, [news]);
   if (error) {
     return (
       <Alert severity="error">{error.message}</Alert>
@@ -31,9 +36,12 @@ function MainPage() {
     );
   }
   return (
-    <div className="main-page">
-      {news.map((item) => <CardNews key={item.id} data={item} />)}
-    </div>
+    <>
+      <Search setFilteredNews={setFilteredNews} news={news} />
+      <div className="main-page">
+        {filteredNews.map((item) => <CardNews key={item.id} data={item} />)}
+      </div>
+    </>
   );
 }
 
