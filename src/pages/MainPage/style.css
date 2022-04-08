@@ -5,3 +5,8 @@
   margin: 50px 50px;
   gap: 15px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}

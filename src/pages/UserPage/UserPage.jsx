@@ -39,7 +39,7 @@ function UserPage() {
 
   if (error) {
     return (
-      <Alert severity="error">{error.message}</Alert>
+      <Alert severity="error">{error}</Alert>
     );
   }
   if (loading) {
