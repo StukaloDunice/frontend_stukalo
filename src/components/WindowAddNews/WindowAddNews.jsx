@@ -2,17 +2,12 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import Input from '@mui/material/Input';
+import {
+  Button, TextField, Dialog, DialogActions, DialogContent,
+  DialogTitle, CircularProgress, Box, Alert, Input,
+} from '@mui/material';
 
 import { requestAddNews } from '../../redux/actions/actionsNews';
 
@@ -22,29 +17,23 @@ function WindowAddNews(props) {
   const {
     open, handleClose,
   } = props;
-  const validate = (values) => {
-    const errors = {};
-    if (!values.title) {
-      errors.title = 'Required';
-    } else if (values.title.length > 35) {
-      errors.title = 'Must be 35 characters or less';
-    }
-    if (!values.content) {
-      errors.content = 'Required';
-    } else if (values.content.length > 1000) {
-      errors.content = 'Must be 1000 characters or less';
-    }
-    if (!values.tags) {
-      errors.tags = 'Required';
-    } else if (values.title.length > 1000) {
-      errors.title = 'Must be 1000 characters or less';
-    }
 
-    if (!values.file) {
-      errors.file = 'Required';
-    }
-    return errors;
-  };
+  const SignupSchema = Yup.object().shape({
+    title: Yup.string()
+      .min(5, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    content: Yup.string()
+      .min(10, 'Too Short!')
+      .max(700, 'Too Long!')
+      .required('Required'),
+    tags: Yup.string()
+      .min(5, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+    file: Yup.string()
+      .required('Required'),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -53,7 +42,7 @@ function WindowAddNews(props) {
       tags: '',
       file: null,
     },
-    validate,
+    validationSchema: SignupSchema,
     onSubmit: (values, { resetForm }) => {
       dispatch(requestAddNews(values));
       resetForm();

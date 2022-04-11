@@ -1,4 +1,4 @@
-.user-page__info {
+.info {
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   gap: 15px;
 }
 
-.user-page__news {
+.posts {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -15,7 +15,7 @@
   gap: 15px;
 }
 
-.buttons-add-editing {
+.buttons {
   display: flex;
   gap: 25px;
 }

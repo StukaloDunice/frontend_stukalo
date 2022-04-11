@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import {
+  AppBar, Button, Typography, Toolbar, Box,
+} from '@mui/material';
 
-import WindowAuthorization from '../WindowAuthorization/WindowAuthorization';
+import WindowAuthorization from '../WindowAuthorization';
 import { requestSignOut } from '../../redux/actions/actionsAuthorization';
 
 import './style.css';
@@ -99,4 +97,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default memo(Header);

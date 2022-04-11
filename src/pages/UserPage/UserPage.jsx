@@ -2,27 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Avatar from '@mui/material/Avatar';
-import { Typography } from '@mui/material';
-import Alert from '@mui/material/Alert';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+import {
+  Avatar, Typography, Alert, CircularProgress, Box, Button,
+} from '@mui/material';
 
 import { requestUser } from '../../redux/actions/actionsUser';
-import CardNews from '../../components/CardNews/CardNews';
-import WindowChangeUser from '../../components/WindowChangeUser/WindowChangeUser';
-import WindowAddNews from '../../components/WindowAddNews/WindowAddNews';
+import CardNews from '../../components/CardNews';
+import WindowChangeUser from '../../components/WindowChangeUser';
+import WindowAddNews from '../../components/WindowAddNews';
 import returnImage from '../../lib/returnImage';
 
-import './style.css';
+import styles from './UserPage.module.css';
 
 function UserPage() {
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
     dispatch(requestUser(id));
   }, [dispatch, id]);
+
   const {
     loading, error, current, auth,
   } = useSelector((state) => state.authUser);
@@ -42,6 +41,7 @@ function UserPage() {
       <Alert severity="error">{error}</Alert>
     );
   }
+
   if (loading) {
     return (
       <Box sx={{ display: 'flex' }}>
@@ -52,7 +52,7 @@ function UserPage() {
   if (current) {
     return (
       <>
-        <div className="user-page__info">
+        <div className={styles.info}>
           <Avatar
             alt="Remy Sharp"
             src={returnImage(current.avatar)}
@@ -62,7 +62,7 @@ function UserPage() {
             {current.username}
           </Typography>
           {current.id === auth.id && (
-          <div className="buttons-add-editing">
+          <div className={styles.buttons}>
             <Button
               variant="contained"
               onClick={() => {
@@ -84,7 +84,7 @@ function UserPage() {
           </div>
           )}
         </div>
-        <div className="user-page__news">
+        <div className={styles.posts}>
           {current.news.map((item) => (
             <CardNews
               key={item.id}
