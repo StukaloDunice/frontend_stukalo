@@ -1,28 +1,30 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, {
+  useMemo, useState, useEffect, memo,
+} from 'react';
 import PropTypes from 'prop-types';
 
-import TextField from '@mui/material/TextField';
-import DialogContent from '@mui/material/DialogContent';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Box from '@mui/material/Box';
+import {
+  TextField, DialogContent, Radio, RadioGroup, FormControlLabel, Box,
+} from '@mui/material';
 
 import filterNews from '../../lib/filterNews';
 
-import './style.css';
+import styles from './Search.module.css';
 
 function Search(props) {
   const { setFilteredNews, news } = props;
+
   const [textInput, setTextInput] = useState('');
   const [tab, setTab] = useState('all');
+
   const filteredNews = useMemo(() => filterNews(textInput, tab, news), [textInput, tab]);
+
   useEffect(() => {
     setFilteredNews(filteredNews);
   }, [filteredNews]);
 
   return (
-    <div className="search-news">
+    <div className={styles.search}>
       <Box
         sx={{
           width: 500,
@@ -96,4 +98,4 @@ Search.propTypes = {
   setFilteredNews: PropTypes.func.isRequired,
 };
 
-export default Search;
+export default memo(Search);

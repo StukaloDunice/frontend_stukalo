@@ -2,16 +2,12 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
+import {
+  Button, TextField, Dialog, DialogActions, DialogContent,
+  DialogTitle, CircularProgress, Box, Alert,
+} from '@mui/material';
 
 import { requestReg } from '../../redux/actions/actionsRegistration';
 import { requestAuth } from '../../redux/actions/actionsAuthorization';
@@ -24,27 +20,25 @@ function WindowAuthorization(props) {
     handleClose();
   }, [auth]);
   const currentForm = target === 'sign-up' ? 'Sign up' : 'Sign in';
-  const validate = (values) => {
-    const errors = {};
-    if (!values.password) {
-      errors.password = 'Required';
-    } else if (values.password.length > 30) {
-      errors.password = 'Must be 15 characters or less';
-    }
-    if (values.value === 'sign-up') {
-      if (!values.username) {
-        errors.username = 'Required';
-      } else if (values.username.length > 20) {
-        errors.username = 'Must be 20 characters or less';
-      }
-    }
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-      errors.email = 'Invalid email address';
-    }
-    return errors;
-  };
+
+  const SignupSchema = Yup.object().shape({
+    password: Yup.string()
+      .min(2, 'Too Short!')
+      .max(30, 'Too Long!')
+      .required('Required'),
+    username: Yup.string()
+      .when('value', {
+        is: 'sign-up',
+        then: Yup.string()
+          .min(1, 'Too Short!')
+          .max(30, 'Too Long!')
+          .required('Required'),
+      }),
+    email: Yup.string()
+      .min(5, 'Too Short!')
+      .max(50, 'Too Long!')
+      .required('Required'),
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -53,7 +47,7 @@ function WindowAuthorization(props) {
       username: '',
       password: '',
     },
-    validate,
+    validationSchema: SignupSchema,
     onSubmit: (values, { resetForm }) => {
       if (target === 'sign-up') {
         dispatch(requestReg(values));

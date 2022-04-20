@@ -2,48 +2,41 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import Input from '@mui/material/Input';
+import {
+  Button, TextField, Dialog, DialogActions, DialogContent,
+  DialogTitle, CircularProgress, Box, Alert, Input,
+} from '@mui/material';
 
 import { requestEditingUser } from '../../redux/actions/actionsUser';
 
 function WindowChangeUser(props) {
   const dispatch = useDispatch();
+
   const {
     current, error, loading,
   } = useSelector((state) => state.authUser);
+
   const {
     open, handleClose,
   } = props;
 
-  const validate = (values) => {
-    const errors = {};
-    if (!values.username) {
-      errors.username = 'Required';
-    } else if (values.username.length > 35) {
-      errors.username = 'Must be 35 characters or less';
-    }
-    if (!values.file) {
-      errors.file = 'Required';
-    }
-    return errors;
-  };
+  const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+      .min(1, 'Too Short!')
+      .max(30, 'Too Long!')
+      .required('Required'),
+    file: Yup.string()
+      .required('Required'),
+  });
 
   const formik = useFormik({
     initialValues: {
       username: current.username,
       file: null,
     },
-    validate,
+    validationSchema: SignupSchema,
     onSubmit: (values, { resetForm }) => {
       dispatch(requestEditingUser({ ...values, id: current.id }));
       resetForm();

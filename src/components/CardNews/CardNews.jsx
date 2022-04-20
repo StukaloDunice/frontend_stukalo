@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import {
+  Card, CardContent, CardMedia, Typography,
+} from '@mui/material';
 
-import './style.css';
+import styles from './CardNews.module.css';
 
-function CardNews(props) {
-  const { data } = props;
+function CardNews({ data }) {
   return (
     <Card sx={{ width: 440 }}>
       <CardMedia
@@ -30,7 +28,7 @@ function CardNews(props) {
           {data.tags}
         </Typography>
         <Typography gutterBottom variant="subtitle2">
-          <Link to={`/users/${data.user.id}`} className="user-name">{data.user.username}</Link>
+          <Link to={`/users/${data.user.id}`} className={styles.username}>{data.user.username}</Link>
         </Typography>
       </CardContent>
     </Card>
@@ -50,4 +48,4 @@ CardNews.propTypes = {
     }).isRequired,
   }).isRequired,
 };
-export default CardNews;
+export default memo(CardNews);

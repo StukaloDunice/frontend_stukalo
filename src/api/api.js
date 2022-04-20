@@ -8,9 +8,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const { headers } = config;
     const token = getToken();
     if (token) {
+      const { headers } = config;
       headers.Authorization = token;
     }
     return config;
